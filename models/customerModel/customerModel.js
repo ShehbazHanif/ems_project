@@ -26,7 +26,15 @@ const customerSchema = new mongoose.Schema({
         type: String,
         enum: ['Male', 'Female'], // restrict values to common options
         required: true
-    }
+    },
+    address: {
+        type: String,
+        maxLength: 300,
+    },
+    location: {
+        longitude: { type: Number },
+        latitude: { type: Number },
+    },
 });
 
 const Customer = mongoose.model('Customer', customerSchema);

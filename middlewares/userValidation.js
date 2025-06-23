@@ -1,6 +1,8 @@
-const { z } = require('zod');
+
 
 // Zod schemas for validation
+const { z } = require("zod");
+
 const authCustomerCreateSchema = z.object({
   fullName: z.string()
     .min(2, "Name must be at least 2 characters long")
@@ -29,10 +31,32 @@ const authCustomerCreateSchema = z.object({
     .min(2, "Country name must be at least 2 characters")
     .max(56, "Country name must not exceed 56 characters"),
 
-  gender: z.enum(['Male', 'Female'], {
-    errorMap: () => ({ message: "Gender must be Male, Female" })
+  gender: z.enum(["Male", "Female"], {
+    errorMap: () => ({ message: "Gender must be Male or Female" }),
   }),
+
+  address: z.string()
+    .min(5, "Address must be at least 5 characters")
+    .max(300, "Address must not exceed 300 characters")
+    .optional(),
+
+  longitude: z.number({
+    required_error: "Longitude is required",
+    invalid_type_error: "Longitude must be a number",
+  }).min(-180, "Longitude must be between -180 and 180")
+    .max(180, "Longitude must be between -180 and 180")
+    .optional(),
+
+  latitude: z.number({
+    required_error: "Latitude is required",
+    invalid_type_error: "Latitude must be a number",
+  }).min(-90, "Latitude must be between -90 and 90")
+    .max(90, "Latitude must be between -90 and 90")
+    .optional(),
 });
+
+
+
 const authServiceProviderUserCreateSchema = z.object({
   fullName: z.string()
     .min(2, "Name must be at least 2 characters long")
@@ -62,7 +86,7 @@ const authServiceProviderUserCreateSchema = z.object({
     .max(56, "Country name must not exceed 56 characters"),
 
   gender: z.enum(['Male', 'Female'], {
-    errorMap: () => ({ message: "Gender must be Male or Female" })
+    errorMap: () => ({ message: "Gender must be Male or Female" }),
   }),
 
   businessName: z.string()
@@ -73,8 +97,21 @@ const authServiceProviderUserCreateSchema = z.object({
   address: z.string()
     .min(5, "Address must be at least 5 characters long")
     .max(200, "Address must not exceed 200 characters")
-    .trim()
+    .trim(),
+
+  longitude: z.number({
+    required_error: "Longitude is required",
+    invalid_type_error: "Longitude must be a number",
+  }).min(-180, "Longitude must be between -180 and 180")
+    .max(180, "Longitude must be between -180 and 180"),
+
+  latitude: z.number({
+    required_error: "Latitude is required",
+    invalid_type_error: "Latitude must be a number",
+  }).min(-90, "Latitude must be between -90 and 90")
+    .max(90, "Latitude must be between -90 and 90"),
 });
+
 
 
 const authLoginSchema = z.object({
@@ -82,21 +119,21 @@ const authLoginSchema = z.object({
     .email("Please provide a valid email address")
     .toLowerCase()
     .trim(),
-  
+
   password: z.string()
     .min(1, "Password is required")
 });
 
 // Fixed OTP validation schema
 const otpVerifySchema = z.object({
-    email: z
-        .string()
-        .email("Please provide a valid email address")
-        .toLowerCase()
-        .trim(),
-    otp: z
-        .string()
-        .length(4, "OTP must be exactly 4 digits"),
+  email: z
+    .string()
+    .email("Please provide a valid email address")
+    .toLowerCase()
+    .trim(),
+  otp: z
+    .string()
+    .length(4, "OTP must be exactly 4 digits"),
 });
 
 const validateSchema = (schema) => {
@@ -108,10 +145,10 @@ const validateSchema = (schema) => {
     } catch (error) {
       if (error instanceof z.ZodError) {
         const errorMessages = error.errors.map(err => ({
-  field: err.path.length > 0 ? err.path.join('.') : 'body',
-  message: err.message
-      }));
-        
+          field: err.path.length > 0 ? err.path.join('.') : 'body',
+          message: err.message
+        }));
+
         return res.status(400).json({
           success: false,
           message: "Validation failed",
@@ -128,8 +165,8 @@ const validateSchema = (schema) => {
 };
 
 module.exports = {
- authCustomerCreateSchema,
- authServiceProviderUserCreateSchema,
+  authCustomerCreateSchema,
+  authServiceProviderUserCreateSchema,
   authLoginSchema,
   otpVerifySchema,
   validateSchema
