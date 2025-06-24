@@ -1,5 +1,5 @@
 require("dotenv").config();
-const ServiceProviderUser = require("../../models/serviceProviderUserModel/serviceProviderUserModel");
+const ServiceProviderUser = require("../../models/serviceProviderUserModel/authServiceProviderModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -15,13 +15,11 @@ const handleServiceProviderUserRegister = async (req, res) => {
         country,
         gender,
         businessName,
-        address,
         bio,
         profileDescription,
         dob,
         website,
-        longitude,
-        latitude,
+        address
     } = req.body;
 
     try {
@@ -48,10 +46,6 @@ const handleServiceProviderUserRegister = async (req, res) => {
             profileDescription,
             dob,
             website,
-            location: {
-                longitude,
-                latitude,
-            },
         });
 
         // ✅ Response

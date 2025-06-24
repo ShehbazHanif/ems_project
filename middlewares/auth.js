@@ -5,12 +5,14 @@ function authenticateToken(req, res, next) {
     try {
         const authHeader = req.headers['authorization']; // Get the 'Authorization' header
         const token = authHeader && authHeader.split(' ')[1]; // Format: "Bearer <token>"
+        console.log(token)
 
         if (!token) {
             return res.status(401).json({ status: 401, message: "Auth token is required" });
         }
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        console.log("Decoded Token:", decoded);
 
         if (!decoded || !decoded.user) {
             return res.status(401).json({ status: 401, message: "Invalid token" });

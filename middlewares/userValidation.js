@@ -94,22 +94,6 @@ const authServiceProviderUserCreateSchema = z.object({
     .max(100, "Business name must not exceed 100 characters")
     .trim(),
 
-  address: z.string()
-    .min(5, "Address must be at least 5 characters long")
-    .max(200, "Address must not exceed 200 characters")
-    .trim(),
-
-  longitude: z.number({
-    required_error: "Longitude is required",
-    invalid_type_error: "Longitude must be a number",
-  }).min(-180, "Longitude must be between -180 and 180")
-    .max(180, "Longitude must be between -180 and 180"),
-
-  latitude: z.number({
-    required_error: "Latitude is required",
-    invalid_type_error: "Latitude must be a number",
-  }).min(-90, "Latitude must be between -90 and 90")
-    .max(90, "Latitude must be between -90 and 90"),
 });
 
 

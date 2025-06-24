@@ -1,7 +1,7 @@
 // controllers/otpController.js
 const otpModel = require('../../models/otpModel/otpModel');
-const Customer = require('../../models/customerModel/customerModel');
-const ServiceProviderUser = require('../../models/serviceProviderUserModel/serviceProviderUserModel');
+const Customer = require('../../models/customerModel/authCustomerModel');
+const ServiceProviderUser = require('../../models/serviceProviderUserModel/authServiceProviderModel');
 const sendMail = require('../../services/mailService');
 const bcrypt = require('bcryptjs');
 
