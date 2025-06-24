@@ -5,15 +5,15 @@ const SubCategory = require("../../models/categoryModel/subCategoryModel");
 // ✅ POST: Create New Job
 const createJob = async (req, res) => {
   try {
-    const { title, description, budget, categoryName, subCategoryName, preferredDate } = req.body;
+    const { title, description, minBudget, maxBudget, categoryName, subCategoryName, preferredDate, refImg } = req.body;
     const customerId = req.user.id;
 
-    if (!title || !description || !budget || !categoryName) {
+    if (!title || !description || !minBudget || !categoryName) {
       return res.status(400).json({ success: false, message: "Required fields are missing." });
     }
 
     let category = await Category.findOne({ name: categoryName.trim() });
-    if (!category) category = await Category.create({ name: categoryName.trim(), type: "job" });
+    if (!category) category = await Category.create({ name: categoryName.trim() });
 
     let subCategory = null;
     if (subCategoryName) {

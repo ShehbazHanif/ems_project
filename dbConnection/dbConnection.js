@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const dbConnect = async () => {
    try {
-      await mongoose.connect("mongodb+srv://tahir:112233test@auctionplatform.veyca.mongodb.net/EMS_DB",
+      await mongoose.connect("mongodb://localhost:27017/ems_system",
          {
             useNewUrlParser: true,
             useUnifiedTopology: true,

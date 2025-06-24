@@ -25,12 +25,19 @@ const jobSchema = new mongoose.Schema({
     required: true,
     maxLength: 1000,
   },
-  budget: {
+  minBudget: {
+    type: Number,
+    required: true,
+  },
+  maxBudget: {
     type: Number,
     required: true,
   },
   preferredDate: {
     type: Date,
+  },
+  refImg: {
+    type: String
   },
   status: {
     type: String,

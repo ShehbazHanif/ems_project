@@ -8,11 +8,6 @@ const categorySchema = new mongoose.Schema({
     trim: true,
     maxLength: 100,
   },
-  type: {
-    type: String,
-    enum: ["job", "service"],
-// supports both job and service usage
-  },
 }, {
   timestamps: true,
 });
