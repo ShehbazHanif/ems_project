@@ -8,7 +8,7 @@ const providerSchema = new mongoose.Schema({
   gender: { type: String, enum: ["Male", "Female"], required: true },
   country: { type: String, required: true },
   address: {
-    addname: { type: String, maxLength: 500 },
+    addName: { type: String, maxLength: 500 },
     longitude: { type: Number, default: 50 },
     latitude: { type: Number, default: 50 },
   },

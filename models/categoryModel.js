@@ -5,9 +5,12 @@ const categorySchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    trim: true,
-    maxLength: 100,
   },
+  subcategories: [
+    {
+      type: String,
+    }
+  ]
 }, {
   timestamps: true,
 });

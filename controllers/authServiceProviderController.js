@@ -1,5 +1,5 @@
 require("dotenv").config();
-const ServiceProviderUser = require("../../models/serviceProviderUserModel/authServiceProviderModel");
+const ServiceProviderUser = require("../models/authServiceProviderModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -19,8 +19,12 @@ const handleServiceProviderUserRegister = async (req, res) => {
         profileDescription,
         dob,
         website,
-        address
+        addName,
+        longitude,
+        latitude
     } = req.body;
+    console.log("Body", req.body);
+
 
     try {
         // ✅ Check if user already exists
@@ -41,7 +45,11 @@ const handleServiceProviderUserRegister = async (req, res) => {
             country,
             gender,
             businessName,
-            address,
+            address: {
+                addName,
+                longitude,
+                latitude
+            },
             bio,
             profileDescription,
             dob,

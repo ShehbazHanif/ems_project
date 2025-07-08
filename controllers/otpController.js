@@ -1,8 +1,8 @@
 // controllers/otpController.js
-const otpModel = require('../../models/otpModel/otpModel');
-const Customer = require('../../models/customerModel/authCustomerModel');
-const ServiceProviderUser = require('../../models/serviceProviderUserModel/authServiceProviderModel');
-const sendMail = require('../../services/mailService');
+const otpModel = require('../models/otpModel');
+const Customer = require('../models/authCustomerModel');
+const ServiceProviderUser = require('../models/authServiceProviderModel');
+const sendMail = require('../utils/mailService');
 const bcrypt = require('bcryptjs');
 
 const OTP_EXPIRY_MINUTES = 5;

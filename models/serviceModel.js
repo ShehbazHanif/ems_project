@@ -1,19 +1,18 @@
 const mongoose = require("mongoose");
 
 const serviceSchema = new mongoose.Schema({
-  provider: {
+  providerId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "ServiceProviderUser",
     required: true,
   },
-  category: {
+  categoryId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Category",
     required: true,
   },
   subCategory: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "SubCategory",
+    type: String,
   },
   description: {
     type: String,
