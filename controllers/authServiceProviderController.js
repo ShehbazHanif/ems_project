@@ -90,6 +90,11 @@ const handleLoginServiceProviderUser = async (req, res) => {
             return res.status(400).json({ message: "Invalid credentials", success: false });
         }
 
+
+        let role ='';
+        if(user){
+            role = 'provider';
+        }
         // ✅ Generate token
         const tokenExpiration = process.env.EXPIRE_DAY || "1d";
         const accessToken = jwt.sign(
@@ -98,6 +103,7 @@ const handleLoginServiceProviderUser = async (req, res) => {
                     id: user._id,
                     name: user.fullName,
                     email: user.email,
+                    role:role
                 },
             },
             process.env.JWT_SECRET_KEY,

@@ -68,13 +68,17 @@ const handleLoginCustomer = async (req, res) => {
         if (!isPasswordMatch) {
             return res.status(400).json({ success: false, message: "Invalid credentials" });
         }
-
+        let role ='';
+        if(customer){
+            role = 'customer'
+        }
         const token = jwt.sign(
             {
                 user: {
                     id: customer._id,
-                    name: customer.fullname,
+                    name: customer.fullName,
                     email: customer.email,
+                    role:role
                 },
             },
             process.env.JWT_SECRET_KEY,
